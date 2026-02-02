@@ -18,7 +18,8 @@ func main() {
 }
 
 func rateLimiter(requests <-chan int, limit int) {
-	ticker := time.NewTicker(3 * time.Second)
+	interval := time.Second / time.Duration(limit)
+	ticker := time.NewTicker(interval)
 
 	defer ticker.Stop()
 
