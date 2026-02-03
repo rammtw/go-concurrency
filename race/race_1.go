@@ -13,7 +13,7 @@ func main() {
 	for i := 0; i < 15; i++ {
 		wg.Add(1)
 		go func() {
-			defer wg.Done()
+			worker(wg)
 
 			m.Lock()
 			a = append(a, i)
@@ -24,4 +24,8 @@ func main() {
 	wg.Wait()
 
 	fmt.Println(a)
+}
+
+func worker(wg *sync.WaitGroup) {
+	defer wg.Done()
 }
